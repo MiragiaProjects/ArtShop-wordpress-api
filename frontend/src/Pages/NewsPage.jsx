@@ -8,13 +8,13 @@ import  ListGroup  from 'react-bootstrap/ListGroup'
 import { ListGroupItem } from 'react-bootstrap'
 import { getPosts } from '../services/helper'
 
-const FrontPage = () => {
-  const { post_id } = useParams()
-  const { data, isLoading, isError, error } = useQuery(['post', post_id], () => getPosts(post_id))
-  console.log('data', data)
+const NewsPage = () => {
+    const { post_id } = useParams()
+    const { data, isLoading, isError, error } = useQuery(['post', post_id], () => getPosts(post_id))
+
   return (
     <Container>
-       <h2>Posts</h2>
+        <h2>Posts</h2>
         {isLoading && (<p className='my-3'>Loading ...</p>)}
 
         {isError && (
@@ -26,24 +26,14 @@ const FrontPage = () => {
 
         {data && (
             <>
-          <div>
-            {data.map(post => (
-              <>
-             <div> 
-                <h2>
-                  {post.title.rendered}
-                </h2>
-                <article>
-                    {post.content.rendered}
-                </article>
-             </div>
-             </>
-            ))}
-          </div>
+             <h3>{data.title.rendered}</h3>
+             <hr />
+             <div> picture here</div>
+            other info
             </>
         )}
     </Container>
   )
 }
 
-export default FrontPage
+export default NewsPage

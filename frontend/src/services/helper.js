@@ -15,5 +15,10 @@ export const getPosts = () => {
 
 // Get Products
 export const getProducts = () => {
-    return get(`products`)
+    return get(`products/`)
+}
+
+// Get a specific product
+export const getProduct = (id) => {
+    return get(`products/${id}`)
 }
