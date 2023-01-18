@@ -3,7 +3,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
-const ProductCard = ({ data }) => {
+const ProductCard = ({ data, onAddToCart }) => {
   
   return (
     <div className="d-flex flex-wrap justify-content-between">
@@ -16,7 +16,8 @@ const ProductCard = ({ data }) => {
             <Card.Body className='d-flex flex-column'>
                 <Card.Title><strong>{product.title.rendered}</strong></Card.Title>
                 <Card.Text><strong>Price:</strong> {product.acf.price_on_a_product}</Card.Text>
-                <Button className='mt-auto' as={Link} to={`/products/${product.id}`} variant="primary">Look at</Button>
+                {/* <Button className='mt-auto' as={Link} to={`/products/${product.id}`} variant="primary">Look at</Button> */}
+                <Button onClick={() => onAddToCart(product)}>Add to Cart</Button>
                 
             </Card.Body>
         </Card>
