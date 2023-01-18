@@ -15,10 +15,11 @@ export const getPosts = () => {
 
 // Get Products
 export const getProducts = () => {
-    return get(`products/`)
+    return get(`products/?_embed`)
 }
 
 // Get a specific product
 export const getProduct = (id) => {
-    return get(`products/${id}`)
+    return get(`products/${id}?_embed`)
 }
+

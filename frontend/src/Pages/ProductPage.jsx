@@ -8,9 +8,11 @@ import { useQuery } from 'react-query'
 import Button from 'react-bootstrap/Button'
 import { getProduct } from '../services/helper'
 
+
 const ProductPage = () => {
   const { product_id } = useParams()
   const { data, isLoading, isError, error} = useQuery(['product', product_id], () => getProduct(product_id))
+  console.log('data',data)
 
   return (
     <Container>
@@ -27,9 +29,11 @@ const ProductPage = () => {
       <div>
       <h3>{data.title.rendered}</h3>
 
+      <img src={data._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url} alt="" />
+
       <div>
-        {data.content.rendered}
-        {data.acf.price_on_a_product}
+      <p dangerouslySetInnerHTML={{ __html: data.content.rendered}}></p>
+      <p>{data.acf.price_on_a_product}</p>
       </div>
     
       <Button>

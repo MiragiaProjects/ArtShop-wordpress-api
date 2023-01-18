@@ -24,12 +24,22 @@ const NewsPage = () => {
             </Alert>
         )}
 
-        {data && (
+{data && (
             <>
-             <h3>{data.title.rendered}</h3>
-             <hr />
-             <div> picture here</div>
-            other info
+          <div>
+            {data.map(post => (
+              <>
+             <div> 
+                <h2>
+                  {post.title.rendered}
+                </h2>
+                <article>
+                    {post.content.rendered}
+                </article>
+             </div>
+             </>
+            ))}
+          </div>
             </>
         )}
     </Container>

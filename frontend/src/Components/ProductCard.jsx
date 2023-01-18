@@ -1,8 +1,27 @@
+import { Link } from 'react-router-dom'
 import React from 'react'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
-const ProductCard = () => {
+const ProductCard = ({ data }) => {
+  
   return (
-    <div>ProductCard</div>
+    <div className="d-flex flex-wrap justify-content-between">
+    {data.map(product => (
+        <Card className='w-15 p-3 mt-3 movieCard' key={product.id}>
+          
+              {product && ( 
+                <Card.Img variant='top' src={product._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url } />
+              )}  
+            <Card.Body className='d-flex flex-column'>
+                <Card.Title><strong>{product.title.rendered}</strong></Card.Title>
+                <Card.Text><strong>Price:</strong> {product.acf.price_on_a_product}</Card.Text>
+                <Button className='mt-auto' as={Link} to={`/products/${product.id}`} variant="primary">Look at</Button>
+                
+            </Card.Body>
+        </Card>
+    ))}
+</div>
   )
 }
 

@@ -1,18 +1,23 @@
 import React from 'react'
 import { useParams, Link} from 'react-router-dom'
+import { useState } from 'react'
 import Container  from 'react-bootstrap/Container'
 import Alert from 'react-bootstrap/Alert'
 import { useQuery } from 'react-query'
 import Button from 'react-bootstrap/Button'
 import  ListGroup  from 'react-bootstrap/ListGroup'
 import { ListGroupItem } from 'react-bootstrap'
-import { getProduct } from '../services/helper'
+import { getProducts } from '../services/helper'
+import ProductCard from '../Components/ProductCard'
+
 
 const ProductsPage = () => {
   const { product_id } = useParams()
-  const { data, isLoading, isError, error} = useQuery(['product', product_id], () => getProduct(product_id))
+  const { data, isLoading, isError, error} = useQuery(['product', product_id], () => getProducts(product_id))
+  const [ cartItems, setCartItems ] = useState([])
   return (
     <Container>
+      <h1>Art</h1>
       {isLoading && (<p className='my-3'>Loading ...</p>)}
 
 {isError && (
@@ -21,10 +26,8 @@ const ProductsPage = () => {
         <p>{error.message}</p>
     </Alert>)}
 
-    {data && (
-      <>
-      </>
-    )}
+      {data && <ProductCard data={data} />} 
+
     </Container>
   )
 }
