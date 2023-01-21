@@ -1,6 +1,10 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form';
+import { useForm } from 'react-hook-form'
+import { collection, addDoc } from 'firebase/firestore'
+import { db } from '../firebase'
+import { toast } from 'react-toastify'
 
 
 const Cart = ( props ) => {
@@ -9,6 +13,30 @@ const Cart = ( props ) => {
     const taxPrice = itemsPrice * 0.14;
     const shippingPrice = itemsPrice > 2000 ? 0 : 20;
     const totalPrice = itemsPrice + taxPrice + shippingPrice;
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm()
+
+    const onCreateOrder = async (data) => {
+      await addDoc(collection(db, 'orders'),{
+          email: data.email,
+          name: data.name,
+          adress: data.adress,
+          town: data.town,
+          postcode: data.postcode,
+          totalprice: totalPrice
+      })
+      toast.info('Thanks for your order!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
+      reset()
+  }
+
     return (
       <aside >
         <h2>Cart Items</h2>
@@ -65,41 +93,69 @@ const Cart = ( props ) => {
                   Checkout
                 </Button>
               </div>
-              <Form>
-      <Form.Group className="mb-3" controlId="formEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formName">
-        <Form.Label>First and Last Name</Form.Label>
-        <Form.Control type="string" placeholder="First and Last Name" />
-      </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formAdress">
-        <Form.Label>Adress</Form.Label>
-        <Form.Control type="string" placeholder="Adress" />
-      </Form.Group>
+              <Form onSubmit={handleSubmit(onCreateOrder)} noValidate>
+                <Form.Group className="mb-3" controlId="formEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control 
+                      {...register("email",{
+                          required: "An email is required",
+                          
+                      })} 
+                      type="email" 
+                      placeholder="Enter email" 
+                      />
+                </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formTown">
-        <Form.Label>Town</Form.Label>
-        <Form.Control type="string" placeholder="Town" />
-      </Form.Group>
+                <Form.Group className="mb-3" controlId="formName">
+                  <Form.Label>First and Last Name</Form.Label>
+                  <Form.Control {...register("Name",{
+                          required: "A Name is required",
+                          
+                      })}  
+                      type="string" 
+                      placeholder="First and Last Name" 
+                      />
+                </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formPostcode">
-        <Form.Label>Postcode/Zipcode</Form.Label>
-        <Form.Control type="string" placeholder="Postcode/Zipcode" />
-      </Form.Group>
+                <Form.Group className="mb-3" controlId="formAdress">
+                  <Form.Label>Adress</Form.Label>
+                  <Form.Control {...register("adress",{
+                          required: "An adress is required",
+                          
+                      })}  
+                        type="string" 
+                        placeholder="Adress" 
+                        />
+                </Form.Group>
 
-      <div>The only way to pay right now is with invoice</div>
+                <Form.Group className="mb-3" controlId="formTown">
+                  <Form.Label>Town</Form.Label>
+                  <Form.Control {...register("town",{
+                          required: "A Town is required",
+                      })} 
+                        type="string" 
+                        placeholder="Town" 
+                      />
+                </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Submit Order
-      </Button>
-    </Form>
+                <Form.Group className="mb-3" controlId="formPostcode">
+                  <Form.Label>Postcode/Zipcode</Form.Label>
+                  <Form.Control {...register("postcode",{
+                          required: "A PostCode/ZipCode is required",
+                          
+                      })}  
+                      type="string" 
+                      placeholder="Postcode/Zipcode" />
+                </Form.Group>
+
+                <div>The only way to pay right now is with invoice</div>
+
+                <Button variant="primary" type="submit">
+                  Submit Order
+                </Button>
+              </Form>
             </>
           )}
 
