@@ -35,6 +35,10 @@
     background-color: #40c0f0;
     width: 1.5rem;
   }
+  button.remove {
+    background-color: #f04040;
+    width: 1.5rem;
+  }
  
   .productCard {
     margin: 10px;
@@ -63,5 +67,9 @@
 }
 
 .product-pageProduct {
+  text-align: center;
+}
+
+.infoPage {
   text-align: center;
 }

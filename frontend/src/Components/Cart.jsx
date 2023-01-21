@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form'
 import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../firebase'
-import { toast } from 'react-toastify'
+
 
 
 const Cart = ( props ) => {
@@ -25,16 +25,7 @@ const Cart = ( props ) => {
           postcode: data.postcode,
           totalprice: totalPrice
       })
-      toast.info('Thanks for your order!', {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          });
-      reset()
+      
   }
 
     return (
@@ -47,12 +38,12 @@ const Cart = ( props ) => {
             <div key={item.id} className="row">
               <div className="col-2">{item.title.rendered}</div>
               <div className="col-2">
-                <Button onClick={() => onRemoveFromCart(item)} className="remove">
+                <button onClick={() => onRemoveFromCart(item)} className="remove">
                   -
-                </Button>{' '}
-                <Button onClick={() => onAddToCart(item)} className="add">
+                </button>{' '}
+                <button onClick={() => onAddToCart(item)} className="add">
                   +
-                </Button>
+                </button>
               </div>
   
               <div className="col-2 text-right">
@@ -88,11 +79,6 @@ const Cart = ( props ) => {
                 </div>
               </div>
               <hr />
-              <div className="row">
-                <Button onClick={() => alert('Implement Checkout!')}>
-                  Checkout
-                </Button>
-              </div>
 
 
               <Form onSubmit={handleSubmit(onCreateOrder)} noValidate>

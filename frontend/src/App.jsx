@@ -4,7 +4,6 @@ import './Assets/scss/App.scss'
 import ProductsPage from './Pages/ProductsPage'
 import ProductPage from './Pages/ProductPage'
 import FrontPage from './Pages/FrontPage'
-import NewsPage from './Pages/NewsPage'
 import InfoPage from './Pages/InfoPage'
 
 
