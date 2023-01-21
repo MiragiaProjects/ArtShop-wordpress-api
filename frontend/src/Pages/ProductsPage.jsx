@@ -11,6 +11,9 @@ import { getProducts } from '../services/helper'
 import ProductCard from '../Components/ProductCard'
 import Cart from '../Components/Cart'
 
+
+
+
 const ProductsPage = () => {
   const { product_id } = useParams()
   const { data, isLoading, isError, error} = useQuery(['product', product_id], () => getProducts(product_id))
@@ -55,7 +58,8 @@ const onAddToCart = (data) => {
         <p>Oh no, error!</p>
         <p>{error.message}</p>
     </Alert>)}
-
+      
+      
       {data && <ProductCard onAddToCart={onAddToCart} data={data} />}
 
       <Cart onAddToCart={onAddToCart} onRemoveFromCart={onRemoveFromCart} cartItems={cartItems} />

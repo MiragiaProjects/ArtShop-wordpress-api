@@ -1,26 +1,6 @@
 @import 'bootstrap/scss/bootstrap';
+@import 'main.scss';
 
-
-body {
-    font-family: 'Helvetica';
-  }
-  h1,
-  h2,
-  h3 {
-    margin: 0.5rem 0;
-  }
-  h1 {
-    font-size: 1.5rem;
-  }
-  h2 {
-    font-size: 1.2rem;
-  }
-  h3 {
-    font-size: 1rem;
-  }
-  a {
-    text-decoration: none;
-  }
   .row {
     display: flex;
     justify-content: space-between;
@@ -55,13 +35,33 @@ body {
     background-color: #40c0f0;
     width: 1.5rem;
   }
-  button.remove {
-    background-color: #f04040;
-    width: 1.5rem;
-  }
-  button.badge {
-    background-color: #f04040;
-    border: none;
-    color: #ffffff;
-    width: 1.5rem;
-  }
+ 
+  .productCard {
+    margin: 10px;
+}
+.header-div {
+    text-align: center;
+
+    .frontPage-h1 {
+      margin: 40px 0px;
+    }
+  
+    .frontPage-h2 {
+      margin: 40px 0px;
+    }
+}
+
+.front-pagePosts {
+  text-align: center;
+  margin: 20px;
+  background: rgb(129,184,223);
+  background: radial-gradient(circle, rgba(129,184,223,1) 0%, rgba(175,32,32,0) 100%); 
+  padding: 20px;
+    .post-h2{
+      margin: 20px 0px;
+    }
+}
+
+.product-pageProduct {
+  text-align: center;
+}

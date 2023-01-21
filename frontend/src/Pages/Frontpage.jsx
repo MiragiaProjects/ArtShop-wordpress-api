@@ -1,20 +1,25 @@
 import React from 'react'
-import { useParams, Link} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Container  from 'react-bootstrap/Container'
 import Alert from 'react-bootstrap/Alert'
 import { useQuery } from 'react-query'
-import Button from 'react-bootstrap/Button'
-import  ListGroup  from 'react-bootstrap/ListGroup'
-import { ListGroupItem } from 'react-bootstrap'
 import { getPosts } from '../services/helper'
 
 const FrontPage = () => {
   const { post_id } = useParams()
   const { data, isLoading, isError, error } = useQuery(['post', post_id], () => getPosts(post_id))
-  console.log('data', data)
+
+ 
+
+
   return (
     <Container>
-       <h2>Posts</h2>
+      <div className='header-div'>
+        <h1 className='frontPage-h1'>Do you need any new art?</h1>
+        <hr />
+        <h2 className='frontPage-h2'>News</h2>
+      </div>
+    
         {isLoading && (<p className='my-3'>Loading ...</p>)}
 
         {isError && (
@@ -26,22 +31,30 @@ const FrontPage = () => {
 
         {data && (
             <>
-          <div>
+          <div className='front-pagePosts'>
             {data.map(post => (
               <>
-             <div> 
-                <h2>
+              <div>
+              {post && ( 
+                <img variant='top' src={post._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url } />
+              )}  
+              </div>
+             <div>
+                <h2 className='post-h2'>
                   {post.title.rendered}
                 </h2>
-                <article>
-                    {post.content.rendered}
+                <article
+                dangerouslySetInnerHTML={{ __html: post.content.rendered}}>
                 </article>
+                <hr />
              </div>
              </>
             ))}
           </div>
             </>
         )}
+
+
     </Container>
   )
 }

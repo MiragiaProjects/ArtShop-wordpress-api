@@ -10,7 +10,7 @@ const get = async (endpoint) => {
 
 // Get posts
 export const getPosts = () => {
-    return get(`posts`)
+    return get(`posts/?_embed`)
 }
 
 // Get Products

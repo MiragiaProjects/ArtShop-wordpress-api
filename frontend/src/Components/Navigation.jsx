@@ -1,5 +1,4 @@
 import React from 'react'
-import { useQuery } from 'react-query'
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -16,10 +15,8 @@ const Navigation = () => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ms-auto">
           <Nav.Link as={NavLink} end to="/">Home</Nav.Link>
-          <Nav.Link as={NavLink} end to="/news">News</Nav.Link>
           <Nav.Link as={NavLink} end to="/products">Art</Nav.Link>
           <Nav.Link as={NavLink} end to="/info">Information</Nav.Link>
-          <Nav.Link as={NavLink} end to="/cart">Cart</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Container>
