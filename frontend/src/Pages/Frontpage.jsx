@@ -1,16 +1,16 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
 import Container  from 'react-bootstrap/Container'
 import Alert from 'react-bootstrap/Alert'
 import { useQuery } from 'react-query'
-import { getPosts } from '../services/helper'
+import { getFourPosts } from '../services/helper'
+import { getFourProducts } from '../services/helper'
 
 const FrontPage = () => {
-  const { post_id } = useParams()
-  const { data, isLoading, isError, error } = useQuery(['post', post_id], () => getPosts(post_id))
+  
+  const { data:fourPosts, isLoading:loadingPosts, isError:postError, error:postErrorMsg } = useQuery(['post'], () => getFourPosts())
+
+  const { data:fourProducts, isLoading:loadingProducts, isError:productError, error:productErrorMsg } = useQuery(['product'], () => getFourProducts())
 
  
-
 
   return (
     <Container>
@@ -20,19 +20,19 @@ const FrontPage = () => {
         <h2 className='frontPage-h2'>News</h2>
       </div>
     
-        {isLoading && (<p className='my-3'>Loading ...</p>)}
+        {loadingPosts && (<p className='my-3'>Loading ...</p>)}
 
-        {isError && (
+        {postError && (
             <Alert>
                 <p>Oh no, error!</p>
-                <p>{error.message}</p>
+                <p>{postErrorMsg.message}</p>
             </Alert>
         )}
 
-        {data && (
+        {fourPosts && (
             <>
           <div className='front-pagePosts'>
-            {data.map(post => (
+            {fourPosts.map(post => (
               <>
               <div>
               {post && ( 
@@ -53,6 +53,37 @@ const FrontPage = () => {
           </div>
             </>
         )}
+
+{loadingProducts && (<p className='my-3'>Loading ...</p>)}
+
+{productError && (
+    <Alert>
+        <p>Oh no, error!</p>
+        <p>{productErrorMsg.message}</p>
+    </Alert>
+)}
+
+{fourProducts && (
+    <>
+  <div className='front-pagePosts'>
+    {fourProducts.map(product => (
+      <>
+      <div>
+      {product && ( 
+        <img variant='top' src={product._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url } />
+      )}  
+      </div>
+     <div>
+        <h2 className='post-h2'>
+          {product.title.rendered}
+        </h2>
+        <hr />
+     </div>
+     </>
+    ))}
+  </div>
+    </>
+)}
 
 
     </Container>

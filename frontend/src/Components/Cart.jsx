@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form'
 import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../firebase'
+import { toast } from 'react-toastify'
 
 
 
@@ -23,8 +24,19 @@ const Cart = ( props ) => {
           adress: data.adress,
           town: data.town,
           postcode: data.postcode,
-          totalprice: totalPrice
+          //totalprice: totalPrice,
+          order: data.order,
       })
+      toast.info('Thanks for your order!', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    reset()
       
   }
 
@@ -80,6 +92,14 @@ const Cart = ( props ) => {
               </div>
               <hr />
 
+                <div>
+                  <p>
+                    <stronger>
+                      Sorry for the inconvince but the cart is broken, please fill in the form below...
+                    </stronger>
+                  </p>
+                </div>
+                <hr />
 
               <Form onSubmit={handleSubmit(onCreateOrder)} noValidate>
                 <Form.Group className="mb-3" controlId="formEmail">
@@ -135,6 +155,19 @@ const Cart = ( props ) => {
                       type="string" 
                       placeholder="Postcode/Zipcode" />
                 </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formOrder">
+                  <Form.Label>Order</Form.Label>
+                  <Form.Control {...register("order",{
+                          required: "A Order is required",
+                          
+                      })}  
+                      
+                      placeholder="Order"
+                      as="textarea" 
+                      />
+                </Form.Group>
+
 
                 <div>The only way to pay right now is with invoice</div>
 

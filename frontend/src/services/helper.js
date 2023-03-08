@@ -23,3 +23,12 @@ export const getProduct = (id) => {
     return get(`products/${id}?_embed`)
 }
 
+// Get 4 products
+export const getFourProducts = () => {
+    return get(`products/?_embed?orderby=date?per_page=4`)
+}
+
+// Get 4 posts
+export const getFourPosts = () => {
+    return get(`posts/?_embed?orderby=date?per_page=4`)
+}
