@@ -1,33 +1,24 @@
- import { initializeApp } from "firebase/app"
- import { getAuth } from 'firebase/auth'
- import { getFirestore } from 'firebase/firestore'
- import { getStorage } from 'firebase/storage'
+  import { initializeApp } from "firebase/app"
+  import { getFirestore } from 'firebase/firestore'
 
- //Your web app's Firebase configuration
-  const firebaseConfig = {
- 	apiKey: import.meta.env.FIREBASE_API_KEY,
- 	authDomain: import.meta.env.FIREBASE_AUTH_DOMAIN,
- 	projectId: import.meta.env.FIREBASE_PROJECT_ID,
- 	storageBucket: import.meta.env.FIREBASE_STORAGE_BUCKET,
- 	messagingSenderId: import.meta.env.FIREBASE_MESSAGING_SENDER_ID,
-	appId: import.meta.env.FIREBASE_APP_ID,
+
+  //Your web app's Firebase configuration
+   const firebaseConfig = {
+  	apiKey:"AIzaSyAmnopUnDywS-QYrjG-eKv7He_cDviue68",
+  	authDomain:"artshop-712b2.firebaseapp.com",
+  	projectId:"artshop-712b2",
+  	storageBucket:"artshop-712b2.appspot.com",
+  	messagingSenderId: "969253905233",
+ 	  appId:"1:969253905233:web:40eabe2b076fc478f92970",
+   }
+
+  //Initialize Firebase
+  const app = initializeApp(firebaseConfig)
+
+  // Get Firestore instance
+  const db = getFirestore(app)
+
+  export {
+  	app as default,
+  	db,
   }
-
- //Initialize Firebase
- const app = initializeApp(firebaseConfig)
-
- // Get Authentication instance
- const auth = getAuth(app)
-
- // Get Firestore instance
- const db = getFirestore(app)
-
- // Get Storage instance
- const storage = getStorage(app)
-
- export {
- 	app as default,
- 	auth,
- 	db,
- 	storage,
- }

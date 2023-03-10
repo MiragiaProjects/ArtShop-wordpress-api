@@ -27,16 +27,16 @@ const Cart = ( props ) => {
           //totalprice: totalPrice,
           order: data.order,
       })
-      toast.info('Thanks for your order!', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        });
-    reset()
+    //   toast.info('Thanks for your order!', {
+    //     position: "top-center",
+    //     autoClose: 3000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     });
+     reset()
       
   }
 
@@ -107,6 +107,10 @@ const Cart = ( props ) => {
                   <Form.Control 
                       {...register("email",{
                           required: "An email is required",
+                          minLength: {
+                            value: 2,
+                            message:"Must atlest be 2 characters"
+                        }
                           
                       })} 
                       type="email" 
@@ -116,7 +120,7 @@ const Cart = ( props ) => {
 
                 <Form.Group className="mb-3" controlId="formName">
                   <Form.Label>First and Last Name</Form.Label>
-                  <Form.Control {...register("Name",{
+                  <Form.Control {...register("name",{
                           required: "A Name is required",
                           
                       })}  
@@ -166,14 +170,15 @@ const Cart = ( props ) => {
                       placeholder="Order"
                       as="textarea" 
                       />
+                       <Button variant="primary" type="submit">
+                  Submit Order
+                </Button>
                 </Form.Group>
 
 
                 <div>The only way to pay right now is with invoice</div>
 
-                <Button variant="primary" type="submit">
-                  Submit Order
-                </Button>
+               
               </Form>
             </>
           )}

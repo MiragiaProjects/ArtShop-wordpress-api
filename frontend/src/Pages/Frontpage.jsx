@@ -1,3 +1,4 @@
+import React from 'react'
 import Container  from 'react-bootstrap/Container'
 import Alert from 'react-bootstrap/Alert'
 import { useQuery } from 'react-query'
@@ -15,12 +16,12 @@ const FrontPage = () => {
   return (
     <Container>
       <div className='header-div'>
-        <h1 className='frontPage-h1'>Do you need any new art?</h1>
+        <h1 className='frontPage-h1'>Do you need new art for you walls?</h1>
         <hr />
         <h2 className='frontPage-h2'>News</h2>
       </div>
     
-        {loadingPosts && (<p className='my-3'>Loading ...</p>)}
+         {loadingPosts && (<p className='my-3'>Loading ...</p>)}
 
         {postError && (
             <Alert>
@@ -36,7 +37,7 @@ const FrontPage = () => {
               <>
               <div>
               {post && ( 
-                <img variant='top' src={post._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url } />
+                <img variant='top' alt="post" src={post._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url } />
               )}  
               </div>
              <div>
@@ -70,7 +71,7 @@ const FrontPage = () => {
       <>
       <div>
       {product && ( 
-        <img variant='top' src={product._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url } />
+        <img variant='top' alt="product" src={product._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url } />
       )}  
       </div>
      <div>
@@ -83,7 +84,7 @@ const FrontPage = () => {
     ))}
   </div>
     </>
-)}
+)} 
 
 
     </Container>

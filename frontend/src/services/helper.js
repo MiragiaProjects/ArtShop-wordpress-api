@@ -25,10 +25,10 @@ export const getProduct = (id) => {
 
 // Get 4 products
 export const getFourProducts = () => {
-    return get(`products/?_embed?orderby=date?per_page=4`)
+    return get(`products/?_embed`)
 }
 
 // Get 4 posts
 export const getFourPosts = () => {
-    return get(`posts/?_embed?orderby=date?per_page=4`)
+    return get(`posts/?_embed`)
 }
